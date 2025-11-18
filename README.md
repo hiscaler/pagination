@@ -1,2 +1,3 @@
-# pagination
-Pagination Template
+# Pagination
+
+**Only a Pagination Template for SDK response**
