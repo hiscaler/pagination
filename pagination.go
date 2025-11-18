@@ -1,16 +1,16 @@
 package pagination
 
-// Pagination 带翻页的数据
-type Pagination struct {
+// Pagination 翻页数据
+type Pagination[T any] struct {
 	Page       int  `json:"page"`
 	PageSize   int  `json:"page_size"`
 	TotalCount int  `json:"total_count"`
 	PageCount  int  `json:"page_count"`
 	IsLastPage bool `json:"is_last_page"`
-	Items      any  `json:"items"`
+	Items      []T  `json:"items"`
 }
 
-func New(page, pageSize, total int) *Pagination {
+func New[T any](page, pageSize, total int) *Pagination[T] {
 	if pageSize < 1 {
 		pageSize = 10
 	}
@@ -26,7 +26,7 @@ func New(page, pageSize, total int) *Pagination {
 		page = 1
 	}
 
-	return &Pagination{
+	return &Pagination[T]{
 		Page:       page,
 		PageSize:   pageSize,
 		TotalCount: total,
@@ -35,7 +35,12 @@ func New(page, pageSize, total int) *Pagination {
 	}
 }
 
-func (p *Pagination) SetItems(items any) *Pagination {
+func (p *Pagination[T]) SetItems(items []T) *Pagination[T] {
 	p.Items = items
+	return p
+}
+
+func (p *Pagination[T]) AddItem(item T) *Pagination[T] {
+	p.Items = append(p.Items, item)
 	return p
 }

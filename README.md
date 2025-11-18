@@ -1,3 +1,5 @@
 # Pagination
 
-**Only a Pagination Template for SDK response**
+**规范 SDK 开发中列表结果返回**
+
+**Don't Repeat Yourself!**
